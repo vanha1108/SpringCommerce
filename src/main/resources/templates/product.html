@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 20px 0 0 20px;
+            font-size: 16px;
+            width: 250px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .btn-action {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="row justify-content-center mt-3">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <form class="d-flex justify-content-center">
+            <div class="input-group">
+                <select name="category" class="form-control rounded-0">
+                    <option value="">Chọn danh mục</option>
+                    <option value="phone">Điện thoại</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="tablet">Máy tính bảng</option>
+                </select>
+                <select name="price" class="form-control rounded-0">
+                    <option value="">Chọn giá tiền</option>
+                    <option value="0-5000000">Dưới 5 triệu</option>
+                    <option value="5000000-10000000">Từ 5 đến 10 triệu</option>
+                    <option value="10000000-20000000">Từ 10 đến 20 triệu</option>
+                    <option value="20000000-">Trên 20 triệu</option>
+                </select>
+                <select name="color" class="form-control rounded-0">
+                    <option value="">Chọn màu sắc</option>
+                    <option value="black">Đen</option>
+                    <option value="white">Trắng</option>
+                    <option value="silver">Bạc</option>
+                </select>
+                <select name="brand" class="form-control rounded-0">
+                    <option value="">Chọn thương hiệu</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="apple">Apple</option>
+                    <option value="hp">HP</option>
+                    <option value="dell">Dell</option>
+                </select>
+                <button type="submit" class="btn btn-primary rounded-0">Lọc</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>STT</th>
+                        <th>Danh mục sản phẩm</th>
+                        <th>Giá tiền</th>
+                        <th>Thương hiệu</th>
+                        <th>Màu sắc</th>
+                        <th>Chi tiết</th>
+                        <th>Chỉnh sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${productList}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.category}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td th:text="${product.brand}"></td>
+                        <td th:text="${product.color}"></td>
+                        <td><a th:href="@{/product/{id}(id=${product.id})}" class="btn btn-primary btn-sm rounded-0">Chi tiết</a></td>
+                        <td><a th:href="@{/product/edit/{id}(id=${product.getId()})}" class="btn btn-warning btn-sm rounded-0">Chỉnh sửa</a></td>
+                        <td><a th:href="@{/product/delete/{id}(id=${product.getId()})}" class="btn btn-danger btn-sm rounded-0">Xóa</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <a href="/product/new" class="btn btn-info btn-lg btn-block rounded-0">Thêm một sản phẩm mới</a>
+        </div>
+    </div>
+
+
+
+</div>
+</body>
+</html>
